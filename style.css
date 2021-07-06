@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .container {
   width: 100%;
   height: 100vh;
@@ -13,8 +17,18 @@
   left: 0;
 }
 
-body {
-  margin: 0;
+.rotate-right {
+  transform: rotate(360deg);
 }
 
-/* Will delete just trying something to commit */
+.rotate-left {
+  transform: rotate(180deg);
+}
+
+.rotate-down {
+  transform: rotate(90deg);
+}
+
+.rotate-up {
+  transform: rotate(270deg);
+}
