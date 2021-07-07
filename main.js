@@ -1,5 +1,6 @@
 const data = {
-  position: 'east'
+  position: 'east',
+  stopOrGo: false
 };
 
 const car = document.querySelector('.car');
@@ -19,7 +20,15 @@ document.addEventListener('keydown', function () {
     car.className = 'car rotate-up';
     data.position = 'north';
   } else if (event.key === ' ') {
-    intervalSet = setInterval(movement, 16);
+    if (data.stopOrGo === false) {
+      intervalSet = setInterval(movement, 16);
+      data.stopOrGo = true;
+      //console.log('stoporgo true:', data.stopOrGo)
+    } else {
+      clearInterval(intervalSet);
+      data.stopOrGo = false;
+      //console.log('stoporgo false:', data.stopOrGo)
+    }
   }
 });
 
