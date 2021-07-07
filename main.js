@@ -1,5 +1,7 @@
 const data = {
-  position: 'east'
+  position: 'east',
+  stopOrGo: false,
+  steering: { horizontal: 0, vertical: 0 }
 };
 
 const car = document.querySelector('.car');
@@ -19,12 +21,34 @@ document.addEventListener('keydown', function () {
     car.className = 'car rotate-up';
     data.position = 'north';
   } else if (event.key === ' ') {
-    intervalSet = setInterval(movement, 16);
+    if (data.stopOrGo === false) {
+      intervalSet = setInterval(movement, 16);
+      data.stopOrGo = true;
+    } else {
+      clearInterval(intervalSet);
+      data.stopOrGo = false;
+    }
   }
 });
 
-let speed = 0;
+let speedLeftRight = 0;
+let speedUpDown = 0;
 function movement() {
-  car.style.top = speed + 'px';
-  speed = speed + 3;
-}
+  if (data.position === 'east') {
+    car.style.left = speedLeftRight + 'px';
+    speedLeftRight = speedLeftRight + 10;
+    data.steering.horizontal = speedLeftRight;
+  } else if (data.position === 'west') {
+    car.style.left = speedLeftRight + 'px';
+    speedLeftRight = speedLeftRight - 10;
+    data.steering.horizontal = speedLeftRight;
+  } else if (data.position === 'south') {
+    car.style.top = speedUpDown + 'px';
+    speedUpDown = speedUpDown + 10;
+    data.steering.vertical = speedUpDown;
+  } else if (data.position === 'north') {
+    car.style.top = speedUpDown + 'px';
+    speedUpDown = speedUpDown - 10;
+    data.steering.vertical = speedUpDown;
+  }
+};
