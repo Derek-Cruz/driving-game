@@ -3,6 +3,7 @@ const data = {
 };
 
 const car = document.querySelector('.car');
+let intervalSet = null;
 
 document.addEventListener('keydown', function () {
   if (event.key === 'ArrowRight') {
@@ -17,5 +18,13 @@ document.addEventListener('keydown', function () {
   } else if (event.key === 'ArrowUp') {
     car.className = 'car rotate-up';
     data.position = 'north';
+  } else if (event.key === ' ') {
+    intervalSet = setInterval(movement, 16);
   }
 });
+
+let speed = 0;
+function movement() {
+  car.style.top = speed + 'px';
+  speed = speed + 3;
+}
